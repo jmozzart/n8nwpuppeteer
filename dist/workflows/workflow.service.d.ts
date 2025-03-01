@@ -1,0 +1,48 @@
+import type { Scope } from '@n8n/permissions';
+import type { EntityManager } from '@n8n/typeorm';
+import { BinaryDataService } from 'n8n-core';
+import { ActiveWorkflowManager } from '../active-workflow-manager';
+import type { User } from '../databases/entities/user';
+import type { WorkflowEntity } from '../databases/entities/workflow-entity';
+import { ExecutionRepository } from '../databases/repositories/execution.repository';
+import { SharedWorkflowRepository } from '../databases/repositories/shared-workflow.repository';
+import { WorkflowTagMappingRepository } from '../databases/repositories/workflow-tag-mapping.repository';
+import { WorkflowRepository } from '../databases/repositories/workflow.repository';
+import { EventService } from '../events/event.service';
+import { ExternalHooks } from '../external-hooks';
+import { Logger } from '../logging/logger.service';
+import { type ListQuery } from '../requests';
+import { OrchestrationService } from '../services/orchestration.service';
+import { OwnershipService } from '../services/ownership.service';
+import { ProjectService } from '../services/project.service';
+import { RoleService } from '../services/role.service';
+import { TagService } from '../services/tag.service';
+import { WorkflowHistoryService } from './workflow-history/workflow-history.service.ee';
+import { WorkflowSharingService } from './workflow-sharing.service';
+export declare class WorkflowService {
+    private readonly logger;
+    private readonly sharedWorkflowRepository;
+    private readonly workflowRepository;
+    private readonly workflowTagMappingRepository;
+    private readonly binaryDataService;
+    private readonly ownershipService;
+    private readonly tagService;
+    private readonly workflowHistoryService;
+    private readonly orchestrationService;
+    private readonly externalHooks;
+    private readonly activeWorkflowManager;
+    private readonly roleService;
+    private readonly workflowSharingService;
+    private readonly projectService;
+    private readonly executionRepository;
+    private readonly eventService;
+    constructor(logger: Logger, sharedWorkflowRepository: SharedWorkflowRepository, workflowRepository: WorkflowRepository, workflowTagMappingRepository: WorkflowTagMappingRepository, binaryDataService: BinaryDataService, ownershipService: OwnershipService, tagService: TagService, workflowHistoryService: WorkflowHistoryService, orchestrationService: OrchestrationService, externalHooks: ExternalHooks, activeWorkflowManager: ActiveWorkflowManager, roleService: RoleService, workflowSharingService: WorkflowSharingService, projectService: ProjectService, executionRepository: ExecutionRepository, eventService: EventService);
+    getMany(user: User, options?: ListQuery.Options, includeScopes?: boolean): Promise<{
+        workflows: (Pick<WorkflowEntity, "id"> & Partial<Pick<WorkflowEntity, "tags" | "createdAt" | "updatedAt" | "name" | "versionId" | "active">>)[] | ListQuery.Workflow.WithSharing[];
+        count: number;
+    }>;
+    update(user: User, workflowUpdateData: WorkflowEntity, workflowId: string, tagIds?: string[], forceSave?: boolean): Promise<WorkflowEntity>;
+    delete(user: User, workflowId: string): Promise<WorkflowEntity | undefined>;
+    getWorkflowScopes(user: User, workflowId: string): Promise<Scope[]>;
+    transferAll(fromProjectId: string, toProjectId: string, trx?: EntityManager): Promise<void>;
+}

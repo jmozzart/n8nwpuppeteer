@@ -1,0 +1,1 @@
+{"version":3,"file":"max-stalled-count.error.js","sourceRoot":"","sources":["../../src/errors/max-stalled-count.error.ts"],"names":[],"mappings":";;;AAAA,+CAAgD;AAKhD,MAAa,oBAAqB,SAAQ,+BAAgB;IACzD,YAAY,KAAY;QACvB,KAAK,CAAC,oFAAoF,EAAE;YAC3F,KAAK,EAAE,SAAS;YAChB,KAAK;SACL,CAAC,CAAC;IACJ,CAAC;CACD;AAPD,oDAOC"}

@@ -1,0 +1,41 @@
+import express from 'express';
+import { AuthService } from '../../../auth/auth.service';
+import { EventService } from '../../../events/event.service';
+import { AuthenticatedRequest } from '../../../requests';
+import { UrlService } from '../../../services/url.service';
+import { SamlService } from '../saml.service.ee';
+import type { SamlLoginBinding } from '../types';
+import { SamlConfiguration } from '../types/requests';
+export declare class SamlController {
+    private readonly authService;
+    private readonly samlService;
+    private readonly urlService;
+    private readonly eventService;
+    constructor(authService: AuthService, samlService: SamlService, urlService: UrlService, eventService: EventService);
+    getServiceProviderMetadata(_: express.Request, res: express.Response): Promise<express.Response<any, Record<string, any>>>;
+    configGet(): Promise<{
+        entityID: string;
+        returnUrl: string;
+        mapping?: import("../types/saml-attribute-mapping").SamlAttributeMapping;
+        metadata?: string;
+        metadataUrl?: string;
+        ignoreSSL?: boolean;
+        loginBinding?: SamlLoginBinding;
+        loginEnabled?: boolean;
+        loginLabel?: string;
+        authnRequestsSigned?: boolean;
+        wantAssertionsSigned?: boolean;
+        wantMessageSigned?: boolean;
+        acsBinding?: SamlLoginBinding;
+        signatureConfig?: import("samlify/types/src/types").SignatureConfig;
+        relayState?: string;
+    }>;
+    configPost(req: SamlConfiguration.Update): Promise<import("../types/saml-preferences").SamlPreferences | undefined>;
+    toggleEnabledPost(req: SamlConfiguration.Toggle, res: express.Response): Promise<express.Response<any, Record<string, any>>>;
+    acsGet(req: SamlConfiguration.AcsRequest, res: express.Response): Promise<void | express.Response<any, Record<string, any>>>;
+    acsPost(req: SamlConfiguration.AcsRequest, res: express.Response): Promise<void | express.Response<any, Record<string, any>>>;
+    private acsHandler;
+    initSsoGet(req: express.Request, res: express.Response): Promise<string | express.Response<any, Record<string, any>>>;
+    configTestGet(_: AuthenticatedRequest, res: express.Response): Promise<string | express.Response<any, Record<string, any>>>;
+    private handleInitSSO;
+}

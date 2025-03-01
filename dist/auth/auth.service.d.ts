@@ -1,0 +1,31 @@
+import type { NextFunction, Response } from 'express';
+import type { User } from '../databases/entities/user';
+import { InvalidAuthTokenRepository } from '../databases/repositories/invalid-auth-token.repository';
+import { UserRepository } from '../databases/repositories/user.repository';
+import { License } from '../license';
+import { Logger } from '../logging/logger.service';
+import type { AuthenticatedRequest } from '../requests';
+import { JwtService } from '../services/jwt.service';
+import { UrlService } from '../services/url.service';
+export declare class AuthService {
+    private readonly logger;
+    private readonly license;
+    private readonly jwtService;
+    private readonly urlService;
+    private readonly userRepository;
+    private readonly invalidAuthTokenRepository;
+    constructor(logger: Logger, license: License, jwtService: JwtService, urlService: UrlService, userRepository: UserRepository, invalidAuthTokenRepository: InvalidAuthTokenRepository);
+    authMiddleware(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void>;
+    clearCookie(res: Response): void;
+    invalidateToken(req: AuthenticatedRequest): Promise<void>;
+    issueCookie(res: Response, user: User, browserId?: string): void;
+    issueJWT(user: User, browserId?: string): string;
+    resolveJwt(token: string, req: AuthenticatedRequest, res: Response): Promise<User>;
+    generatePasswordResetToken(user: User, expiresIn?: string): string;
+    generatePasswordResetUrl(user: User): string;
+    resolvePasswordResetToken(token: string): Promise<User | undefined>;
+    createJWTHash({ email, password }: User): string;
+    private hash;
+    get jwtRefreshTimeout(): number;
+    get jwtExpiration(): number;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-concurrency-limit.error.js","sourceRoot":"","sources":["../../src/errors/invalid-concurrency-limit.error.ts"],"names":[],"mappings":";;;AAAA,+CAAgD;AAEhD,MAAa,4BAA6B,SAAQ,+BAAgB;IACjE,YAAY,KAAa;QACxB,KAAK,CAAC,wCAAwC,EAAE,EAAE,KAAK,EAAE,SAAS,EAAE,KAAK,EAAE,EAAE,KAAK,EAAE,EAAE,CAAC,CAAC;IACzF,CAAC;CACD;AAJD,oEAIC"}

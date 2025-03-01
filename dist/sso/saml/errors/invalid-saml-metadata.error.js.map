@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-saml-metadata.error.js","sourceRoot":"","sources":["../../../../src/sso/saml/errors/invalid-saml-metadata.error.ts"],"names":[],"mappings":";;;AAAA,+CAAgD;AAEhD,MAAa,wBAAyB,SAAQ,+BAAgB;IAC7D;QACC,KAAK,CAAC,uBAAuB,EAAE,EAAE,KAAK,EAAE,SAAS,EAAE,CAAC,CAAC;IACtD,CAAC;CACD;AAJD,4DAIC"}

@@ -1,0 +1,8 @@
+import { BaseFilter } from './base.filter.dto';
+export declare class WorkflowFilter extends BaseFilter {
+    name?: string;
+    active?: boolean;
+    tags?: string[];
+    projectId?: string;
+    static fromString(rawFilter: string): Promise<Record<string, any>>;
+}

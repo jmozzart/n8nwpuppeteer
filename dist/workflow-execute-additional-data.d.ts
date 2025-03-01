@@ -1,0 +1,15 @@
+import type { PushType } from '@n8n/api-types';
+import { Workflow, WorkflowHooks } from 'n8n-workflow';
+import type { IDataObject, IExecuteWorkflowInfo, INodeExecutionData, INodeParameters, IRun, IWorkflowBase, IWorkflowExecuteAdditionalData, IWorkflowExecuteHooks, IWorkflowHooksOptionalParameters, IWorkflowSettings, WorkflowExecuteMode, ExecutionStatus, ExecuteWorkflowOptions, IWorkflowExecutionDataProcess, ExecuteWorkflowData, RelatedExecution } from 'n8n-workflow';
+export declare function objectToError(errorObject: unknown, workflow: Workflow): Error;
+export declare function executeErrorWorkflow(workflowData: IWorkflowBase, fullRunData: IRun, mode: WorkflowExecuteMode, executionId?: string, retryOf?: string): void;
+export declare function hookFunctionsPreExecute(): IWorkflowExecuteHooks;
+export declare function getRunData(workflowData: IWorkflowBase, inputData?: INodeExecutionData[], parentExecution?: RelatedExecution): Promise<IWorkflowExecutionDataProcess>;
+export declare function getWorkflowData(workflowInfo: IExecuteWorkflowInfo, parentWorkflowId: string, parentWorkflowSettings?: IWorkflowSettings): Promise<IWorkflowBase>;
+export declare function executeWorkflow(workflowInfo: IExecuteWorkflowInfo, additionalData: IWorkflowExecuteAdditionalData, options: ExecuteWorkflowOptions): Promise<ExecuteWorkflowData>;
+export declare function setExecutionStatus(status: ExecutionStatus): void;
+export declare function sendDataToUI(type: PushType, data: IDataObject | IDataObject[]): void;
+export declare function getBase(userId?: string, currentNodeParameters?: INodeParameters, executionTimeoutTimestamp?: number): Promise<IWorkflowExecuteAdditionalData>;
+export declare function getWorkflowHooksWorkerExecuter(mode: WorkflowExecuteMode, executionId: string, workflowData: IWorkflowBase, optionalParameters?: IWorkflowHooksOptionalParameters): WorkflowHooks;
+export declare function getWorkflowHooksWorkerMain(mode: WorkflowExecuteMode, executionId: string, workflowData: IWorkflowBase, optionalParameters?: IWorkflowHooksOptionalParameters): WorkflowHooks;
+export declare function getWorkflowHooksMain(data: IWorkflowExecutionDataProcess, executionId: string): WorkflowHooks;
